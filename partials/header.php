@@ -1,3 +1,72 @@
+<?php session_start(); ?>
+<!-- ღილაკები -->
+<!-- SIGN UP Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form class="modal-content" method="post" action="signup_handler.php">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" name="id" class="form-control mb-2" placeholder="Enter ID" required>
+        <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- LOGIN Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form class="modal-content" method="post" action="login_handler.php">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" name="id" class="form-control mb-2" placeholder="Enter ID" required>
+        <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- ღილაკები -->
+<style>
+/* ღილაკების სტილის გასწორება */
+.quote_btn-container a {
+  color: white;
+  text-decoration: none !important;
+  margin-left: 15px;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quote_btn-container a i {
+  transition: color 0.2s ease-in-out;
+  color: white;
+}
+
+.quote_btn-container a:hover {
+  color: black;
+  text-decoration: none !important;
+}
+
+.quote_btn-container a:hover i {
+  color: black;
+}
+/* ღილაკების სტილის გასწორება */
+</style>
+
 <header class="header_section">
   <div class="header_top">
     <div class="container">
@@ -31,9 +100,28 @@
             </ul>
           </div>
 
+<!-- ღილაკები -->
           <div class="quote_btn-container d-flex align-items-center">
-            <a href=""><i class="fa fa-user" aria-hidden="true"></i><span>Login</span></a>
-            <a href=""><i class="fa fa-user" aria-hidden="true"></i><span>Sign Up</span></a>
+          <?php if (isset($_SESSION['user'])): ?>
+  <div class="quote_btn-container d-flex align-items-center">
+    <i class="fa fa-user" aria-hidden="true"></i>
+    <span class="logged-in-text">
+      Logged in as <strong><?= htmlspecialchars($_SESSION['user']) ?></strong> |
+    </span>
+    <a href="logout.php" class="logout-link">LOGOUT</a>
+  </div>
+<?php else: ?>
+  <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+    <i class="fa fa-user" aria-hidden="true"></i> LOGIN
+  </a>
+  <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">
+    <i class="fa fa-user" aria-hidden="true"></i> SIGN UP
+  </a>
+<?php endif; ?>
+
+
+<!-- ღილაკები -->
+
 
             <!-- Search Form -->
             <form class="form-inline ml-2" id="searchForm" onsubmit="return false;" style="position: relative;">
@@ -49,7 +137,7 @@
   </div>
 </header>
 
-<!-- Styles -->
+<!-- Styles  ღილაკები  -->
 <style>
 #searchForm {
   position: relative;
@@ -79,8 +167,45 @@
   visibility: visible;
   width: 250px;
 }
-</style>
+/* საერთო ღილაკები */
+.quote_btn-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+.quote_btn-container a {
+  color: white;
+  text-decoration: none !important;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quote_btn-container a:hover {
+  color: black;
+  text-decoration: none !important;
+}
+
+.quote_btn-container i {
+  color: white;
+  transition: color 0.2s ease-in-out;
+}
+
+.quote_btn-container a:hover i {
+  color: black;
+}
+
+/* Logged in ტექსტი */
+.logged-in-text {
+  color: white;
+  font-weight: 400;
+}
+
+</style>
+<!-- Styles  ღილაკები  -->
 
 <!-- Script -->
 <script>
@@ -112,3 +237,8 @@
     }
   });
 </script>
+<!-- ღილაკები -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ღილაკები -->
